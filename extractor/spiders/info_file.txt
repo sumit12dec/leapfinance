@@ -1,0 +1,29 @@
+session = boto3.Session(
+    aws_access_key_id="AKIAIHO7HAOU7SYXRWTA",
+    aws_secret_access_key="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",
+)
+
+
+dynamodb = session.resource('dynamodb', region_name='us-east-1')   
+
+leap_finance = dynamodb.Table('leap_finance')
+
+
+leap_finance.put_item(
+   Item={
+        'username': 'janedoe',
+        'first_name': 'Jane',
+        'last_name': 'Doe',
+        'age': 25,
+        'account_type': 'standard_user',
+    }
+)
+
+
+
+response = table.get_item(
+    Key={
+        'url_id': 1    
+        }
+)
+item = response['Item']

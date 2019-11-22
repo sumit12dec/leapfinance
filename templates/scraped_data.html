@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+
+<h4>Scraped Data</h4>
+{% if error %}
+
+<h3>{{error}}</h3>
+
+<a href="/spider/">Go back to Spider page again.</a>
+
+{% else %}
+
+<section> 
+    <div class="row">
+        <div class="col-xs-12"> <b>Text:</b> <textarea style="height: 500px; width: 800px;">{{text}}</textarea> </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+        	<b>Title:</b> <textarea style="width: 800px;">{{title}}</textarea>
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+        	<b>Meta Keywords:</b>
+   			<p>{{meta_keywords}}</p>
+        </div>
+
+    </div>
+
+        <div class="row">
+        <div class="col-xs-12">
+        	<b>Meta Description:</b>
+        	<p>{{meta_desc}}</p>
+        </div>
+
+    </div>
+
+
+    <div class="row">
+        <div class="col-xs-12">
+        	<b>Links Found:</b>
+            <ol>
+        	{% for link in all_links%}
+        	<li><a href="{{link}}">{{link}}</a><br></li>
+        	{% endfor %}
+            </ol>
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+        	<b>Images Found:</b>
+            <ol>
+
+        	{% for image in images%}
+        	<li><a href="{{image}}">{{image}}</a><br></li>
+        	{% endfor %}
+            </ol>
+        </div>
+
+    </div>
+
+
+    <div class="row">
+        <div class="col-xs-12">
+        	<b>Emails Found:</b>
+            <ol>
+        	{% for email in all_emails%}
+        	<li><a href="mailto: {{email}}">{{email}}</a><br></li>
+        	{% endfor %}
+            </ol>
+        </div>
+
+    </div>
+
+
+    <div class="row">
+        <div class="col-xs-12">
+            <b>Download HTML TXT File:</b>
+            <a href="{{s3_link}}">{{s3_link}}</a>
+        </div>
+
+    </div>
+
+{% endif %}
+
+
+
+</section>
+{% endblock %}
+
