@@ -1,7 +1,3 @@
-session = boto3.Session(
-    aws_access_key_id="AKIAIHO7HAOU7SYXRWTA",
-    aws_secret_access_key="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",
-)
 
 
 dynamodb = session.resource('dynamodb', region_name='us-east-1')   
