@@ -36,6 +36,9 @@ Note: Make sure to add the `ACCESS_KEY_ID` and `SECRET_ACCESS_KEY` in `extractor
 If the scraping takes more time then user can leave the screen and come back later and submit the same url in the above endpoint. This time if the scrapped data is already in DB then it'll just be retrieved from DB and shown on the screen.
 
 
+# AWS Lambda Code
+
+Code deployed in AWS Lambda can be seen under extractor folder
 
 ## Architecture Diagram
 
