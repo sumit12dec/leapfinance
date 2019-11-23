@@ -1,12 +1,14 @@
 # LeapFinance
 Assignment for LeapFinance
 
-Django Application is deployed here: http://leap-finance-crawler.us-east-1.elasticbeanstalk.com
+### Application is hosted using Elastic Beanstalk by AWS here: 
+
+Django Application can be accessed here: http://leap-finance-crawler.us-east-1.elasticbeanstalk.com
 
 An already created user can be used:
 
-User: sumit <br/>
-Pass: sumit
+`User: sumit` <br/>
+`Pass: sumit`
 
 Admin Console is enabled to visualize or edit the model data. Same user can be used to login here: http://leap-finance-crawler.us-east-1.elasticbeanstalk.com/admin/
 
