@@ -40,7 +40,7 @@ If the scraping takes more time then user can leave the screen and come back lat
 ## Architecture Diagram
 
 
-<img src="./lp_architecture_diagram.png" width="400" height="400" />
+<img src="./lp_architecture_diagram.png" />
 
 
 ## AWS Configuration Details
