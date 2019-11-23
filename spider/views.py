@@ -27,6 +27,9 @@ def get_link(request):
 		If passed a GET request, returns the blank form.
 		"""
 	# if this is a POST request we need to process the form data
+	if not request.user.is_authenticated:
+		return HttpResponse("Please <a href='/accounts/login'>login</a> to continue.")
+
 	if request.method == 'POST':
 		# create a form instance and populate it with data from the request:
 		form = LinkForm(request.POST)
