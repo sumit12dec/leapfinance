@@ -36,26 +36,25 @@ Note: Make sure to add the `ACCESS_KEY_ID` and `SECRET_ACCESS_KEY` in `extractor
 If the scraping takes more time then user can leave the screen and come back later and submit the same url in the above endpoint. This time if the scrapped data is already in DB then it'll just be retrieved from DB and shown on the screen.
 
 
-### AWS Details
+## AWS Details
 # Capacity
-Server Type: AWS AMI Linux
-Max: 4
-Min: 1
-Scale down increment: -1
-Scale up increment: 1
-Availability Zones: Any
-Breach duration: 5
-Scaling cooldown: 360 seconds
-Placement:
-Environment type: load balancing, auto scaling
-Instance type: t2.micro
+Server Type: AWS AMI Linux<br/>
+Max: 4<br/>
+Min: 1<br/>
+Scale down increment: -1<br/>
+Scale up increment: 1<br/>
+Availability Zones: Any<br/>
+Breach duration: 5<br/>
+Scaling cooldown: 360 seconds<br/>
+Environment type: load balancing, auto scaling<br/>
+Instance type: t2.micro<br/>
 
 # Load Balancer
 
-Listeners: 1
-Load balancing across multiple Availability Zones enabled: disabled
-Interval: 10
-Unhealthy threshold: 5
-Healthy threshold: 3
-Load balancer type: classic
-Timeout: 5
+Listeners: 1<br/>
+Load balancing across multiple Availability Zones enabled: disabled<br/>
+Interval: 10<br/>
+Unhealthy threshold: 5<br/>
+Healthy threshold: 3<br/>
+Load balancer type: classic<br/>
+Timeout: 5<br/>
