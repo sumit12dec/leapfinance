@@ -65,3 +65,7 @@ NumProcesses: 1<br/>
 NumThreads: 15<br/>
 WSGIPath: crawler/wsgi.py<br/>
 Static files: /static/="static/"<br/>
+
+##Architecture Diagram
+
+![](lp_architecture_diagram.png)
