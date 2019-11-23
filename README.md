@@ -1,12 +1,14 @@
 # LeapFinance
 Assignment for LeapFinance
 
-Django Application is deployed here: http://leap-finance-crawler.us-east-1.elasticbeanstalk.com
+### Application is hosted using Elastic Beanstalk by AWS here: 
+
+Django Application can be accessed here: http://leap-finance-crawler.us-east-1.elasticbeanstalk.com
 
 An already created user can be used:
 
-User: sumit <br/>
-Pass: sumit
+`User: sumit` <br/>
+`Pass: sumit`
 
 Admin Console is enabled to visualize or edit the model data. Same user can be used to login here: http://leap-finance-crawler.us-east-1.elasticbeanstalk.com/admin/
 
@@ -32,3 +34,38 @@ Note: Make sure to add the `ACCESS_KEY_ID` and `SECRET_ACCESS_KEY` in `extractor
 {{host}}/spider/ shows a Django Form to submit any link to be scraped and wait for 3-10 seconds while scrapping happens and then populates the data on page.
 
 If the scraping takes more time then user can leave the screen and come back later and submit the same url in the above endpoint. This time if the scrapped data is already in DB then it'll just be retrieved from DB and shown on the screen.
+
+
+## AWS Details
+# Capacity
+Server Type: AWS AMI Linux<br/>
+Max: 4<br/>
+Min: 1<br/>
+Scale down increment: -1<br/>
+Scale up increment: 1<br/>
+Availability Zones: Any<br/>
+Breach duration: 5<br/>
+Scaling cooldown: 360 seconds<br/>
+Environment type: load balancing, auto scaling<br/>
+Instance type: t2.micro<br/>
+
+# Load Balancer
+
+Listeners: 1<br/>
+Load balancing across multiple Availability Zones enabled: disabled<br/>
+Interval: 10<br/>
+Unhealthy threshold: 5<br/>
+Healthy threshold: 3<br/>
+Load balancer type: classic<br/>
+Timeout: 5<br/>
+
+# Software
+
+NumProcesses: 1<br/>
+NumThreads: 15<br/>
+WSGIPath: crawler/wsgi.py<br/>
+Static files: /static/="static/"<br/>
+
+##Architecture Diagram
+
+![](lp_architecture_diagram.png)
