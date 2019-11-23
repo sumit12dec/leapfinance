@@ -75,3 +75,7 @@ NumProcesses: 1<br/>
 NumThreads: 15<br/>
 WSGIPath: crawler/wsgi.py<br/>
 Static files: /static/="static/"<br/>
+
+# Technologies Used
+
+EC2, Load Balancer, Auto Scaling Group, S3, DynamoDB, Scrapy Web Framework, Python, Django, SQLite DB, AWS Elasticbeanstalk, AWS Lambda, Boto3.
