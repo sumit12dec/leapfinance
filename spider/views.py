@@ -13,6 +13,7 @@ import time
 from .utils import get_item, invoke_lambda
 
 def index(request):
+	"""Home page for login"""
 	if request.user.is_authenticated:
 		return HttpResponse("Hello, world. You've successfully logged in.")
 
@@ -21,6 +22,10 @@ def index(request):
 
 
 def get_link(request):
+	"""This method accepts both GET and POST. Accepts link as parameters
+		and invokes lambda for scraping the data.
+		If passed a GET request, returns the blank form.
+		"""
 	# if this is a POST request we need to process the form data
 	if request.method == 'POST':
 		# create a form instance and populate it with data from the request:
@@ -33,28 +38,31 @@ def get_link(request):
 			# ...
 			# redirect to a new URL:
 			link = form.cleaned_data['link']
-			print(link, "link provided")
+			# print(link, "link provided")
 
 			r = Reference.objects.filter(crawled_uri=link)
 
 			if r:
+				#Reference found so directly get from Database
 				context = get_item(r[0].url_id)
-			else:		
+			else:
+				#Create a reference and invoke_lambda	
 				payload = {"crawled_uri": link}
 				r = Reference.objects.create(**payload)
 				r.save()
-				# session = get_boto_session()
 
 				response = invoke_lambda(link, r.url_id)
-				print(response['ResponseMetadata']['RequestId'])
-				print("above is request ID")
+				# print(response['ResponseMetadata']['RequestId'])
+				# print("above is request ID")
 				
-				time.sleep(3)
 
+				#Sleep for 3 seconds and then try to get scraped data from DB
+				time.sleep(3)
 				context = get_item(r.url_id)
 				i = 0
 				
 				while i < 6:
+					#Check DB every 1 sec if data is scrapped and stored in DB.
 					time.sleep(1)
 					context = get_item(r.url_id)
 					
@@ -62,12 +70,8 @@ def get_link(request):
 						break
 					i += 1
 
-				print("Response from get_item", context)
-
 			if "error" in context and (context["error"] == "In Process"):
 				context["error"] = "Please try again. Request still in process & taking more than 10 seconds."
-
-			print("response to be forward to UI", context)
 
 		return render(request, 'scraped_data.html', context=context)
 
@@ -78,11 +82,10 @@ def get_link(request):
 	return render(request, 'submit_link.html', {'form': form})
 
 def scraped_data(request):
-	"""View function for home page of site."""
+	"""View function for separate endpoint to show scraped data if needed"""
   
 	context = {'teams': 1, 'points': 2}
 
-	# Render the HTML template index.html with the data in the context variable
 	return render(request, 'scraped_data.html', context=context)
 
 

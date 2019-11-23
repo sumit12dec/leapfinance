@@ -1,10 +1,5 @@
-from scrapyscript import Job, Processor
-from scrapy.spiders import Spider
-from scrapy import Request
 import json
 
-from scrapy.crawler import CrawlerProcess
-from extractor.spiders.myspider import GenericSpider
 
 import scrapy
 import scrapy.crawler as crawler
@@ -12,30 +7,31 @@ from multiprocessing import Process, Pipe
 from twisted.internet import reactor
 
 
+from extractor.spiders.myspider import GenericSpider
+
 def start_to_crawl(request_url, url_id):
+    """Helper method to swapping crawling"""
+    
     runner = crawler.CrawlerRunner()
     runner.crawl(GenericSpider, myurl=request_url, url_id=url_id)
+    
     d = runner.join()
     d.addBoth(lambda _: reactor.stop())
+    
     reactor.run()
 
 
 def lp_entry_lambda(event, context=None):
-    """used to predict based on the entry event from geospark backend
+    """Entry point for lambda function
     """
-    # NOTE assuming the event data is json already
-    # from lxml import etree
-    # print(__name__)
 
-    # print(etree.LXML_VERSION)
     parent_connections = []
     processes = []
 
     response = 'N/A'
-    print("lp_entry_lambda: ", event)
     a = 'None'
+
     if event.get("request_url"):
-        print(event.get("request_url", "URL Not Found"))
         request_url = event.get("request_url")
         url_id = event.get("url_id")
 
@@ -51,8 +47,6 @@ def lp_entry_lambda(event, context=None):
         for process in processes:
             process.join()
 
-        # a = start_to_crawl(request_url=request_url, url_id=url_id)
-    # print("fetching", a)
     return a
 
 
