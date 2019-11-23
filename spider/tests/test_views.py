@@ -49,5 +49,5 @@ class ScrapingTestCase(TestCase):
 
 	def test_storage_dynamodb(self):
 		"""Test Scraped data successfully stored in DynamoDB"""
-		response = get_item(1)
-		self.assertEqual(response.get('url_id'), '1')
+		response = get_item(40)
+		self.assertEqual(response.get('url_id'), '40')
