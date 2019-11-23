@@ -13,6 +13,8 @@
 
 {% else %}
 
+<p><a href="/spider/">Go back to HomePage</a></p>
+
 <section> 
     <div class="row">
         <div class="col-xs-12"> <b>Text:</b> <textarea style="height: 500px; width: 800px;">{{text}}</textarea> </div>
@@ -60,7 +62,10 @@
             <ol>
 
         	{% for image in images%}
-        	<li><a href="{{image}}">{{image}}</a><br></li>
+        	<li><a href="{{image}}">{{image}}</a>
+                <img src="{{image}}" width="42" height="42">
+                <br></li>
+
         	{% endfor %}
             </ol>
         </div>

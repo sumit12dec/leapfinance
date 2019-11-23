@@ -26,6 +26,8 @@ def get_link(request):
 		# create a form instance and populate it with data from the request:
 		form = LinkForm(request.POST)
 		# check whether it's valid:
+		context = {"error": "Error Occured. Invalid Request"}
+		
 		if form.is_valid():
 			# process the data in form.cleaned_data as required
 			# ...
@@ -36,7 +38,7 @@ def get_link(request):
 			r = Reference.objects.filter(crawled_uri=link)
 
 			if r:
-				response = get_item(r[0].url_id)
+				context = get_item(r[0].url_id)
 			else:		
 				payload = {"crawled_uri": link}
 				r = Reference.objects.create(**payload)
@@ -46,16 +48,28 @@ def get_link(request):
 				response = invoke_lambda(link, r.url_id)
 				print(response['ResponseMetadata']['RequestId'])
 				print("above is request ID")
-				time.sleep(1)
+				
+				time.sleep(3)
 
-				response = get_item(r.url_id)
-				if response == "In Process":
-					response = {'error': "Please try again. Request still in process & taking more than 5 seconds."}
-					return render(request, 'scraped_data.html', context=response)
+				context = get_item(r.url_id)
+				i = 0
+				
+				while i < 6:
+					time.sleep(1)
+					context = get_item(r.url_id)
+					
+					if "error" not in context:
+						break
+					i += 1
 
-			print("response to be forward to UI", response)
+				print("Response from get_item", context)
 
-		return render(request, 'scraped_data.html', context=response)
+			if "error" in context and (context["error"] == "In Process"):
+				context["error"] = "Please try again. Request still in process & taking more than 10 seconds."
+
+			print("response to be forward to UI", context)
+
+		return render(request, 'scraped_data.html', context=context)
 
 	# if a GET (or any other method) we'll create a blank form
 	else:

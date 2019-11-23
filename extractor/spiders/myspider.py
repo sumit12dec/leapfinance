@@ -36,8 +36,10 @@ class GenericSpider(scrapy.Spider):
 		# print(response.url, "response.url")
 		# print(all_links, "all_links")
 
-		all_links_endpoint = list(filter(lambda x: x.startswith(response.url), all_links))  
-		return all_links_endpoint
+		all_links_endpoint = list(filter(lambda x: x.startswith(response.url), all_links))
+		# print(all_links_endpoint, "all_links_endpoint")
+		# print(list(set(all_links_endpoint)),  "set all_links_endpoint")
+		return list(set(all_links_endpoint))
 
 	def extract_emails(self, response):
 		emails = re.findall(r'[\w\.-]+@[\w\.-]+\.[a-zA-Z]+', response.text)
@@ -61,7 +63,7 @@ class GenericSpider(scrapy.Spider):
 	def extract_images(self, response):
 		img_urls = [urljoin(response.url, src)
 						for src in response.xpath('//img/@src').extract()]
-		return img_urls
+		return list(set(img_urls))
 	
 	def parse(self, response):
 		title = response.xpath('//title/text()').get()

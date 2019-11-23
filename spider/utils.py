@@ -41,12 +41,13 @@ def unpack_aggregate(D):
 def format_response(response):
 	print(response, "response")
 	data = {}
+	
 	if 'Item' in response:
 		item = response.get('Item')
 
 		# data[''] = 
 		data['title'] = item.get('title').get('S')
-		data['text'] = item.get('text').get('S')
+		data['text'] = item.get('text').get('S').strip()
 		# data['html'] = item.get('html').get('S')
 
 		data['all_links'] = unpack_aggregate(item.get('all_links'))
@@ -58,7 +59,7 @@ def format_response(response):
 		data['url_id'] = item.get('url_id').get('N')
 		data['s3_link'] = item.get('s3_link').get('S')
 	else:
-		return "In Process"
+		data["error"] = "In Process"
 
 	return data
 

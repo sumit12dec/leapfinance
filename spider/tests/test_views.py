@@ -1,6 +1,7 @@
 from django.test import TestCase
 from ..models import Reference
 from datetime import datetime
+from spider.forms import LinkForm
 
 class ReferenceTestCase(TestCase):
     def setUp(self):
@@ -15,5 +16,12 @@ class ReferenceTestCase(TestCase):
         self.assertTrue(isinstance(site1.url_id, int))
         self.assertTrue(isinstance(site2.created_at, datetime))
 
-    def test_dynamodb_created(self):
-    	pass
+
+class LinkFormTestCase(TestCase):
+    def test_linkform(self):
+        form_data = {'link': 'https://sumitraj.in'}
+        form = LinkForm(data=form_data)
+        self.assertTrue(form.is_valid())
+
+class UploadS3TestCase(TestCase):
+	pass
