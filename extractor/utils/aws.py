@@ -3,8 +3,8 @@ import os
 import boto3
 from botocore.exceptions import ClientError
 
-ACCESS_KEY_ID = os.environ.get('ACCESS_KEY_ID')
-SECRET_ACCESS_KEY = os.environ.get('SECRET_ACCESS_KEY')
+ACCESS_KEY_ID = os.environ.get('ACCESS_KEY_ID', None)
+SECRET_ACCESS_KEY = os.environ.get('SECRET_ACCESS_KEY', None)
 
 def get_boto_session():
 	session = boto3.Session(
