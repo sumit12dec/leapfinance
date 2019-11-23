@@ -36,7 +36,13 @@ Note: Make sure to add the `ACCESS_KEY_ID` and `SECRET_ACCESS_KEY` in `extractor
 If the scraping takes more time then user can leave the screen and come back later and submit the same url in the above endpoint. This time if the scrapped data is already in DB then it'll just be retrieved from DB and shown on the screen.
 
 
-## AWS Details
+
+## Architecture Diagram
+
+![](lp_architecture_diagram.png)
+
+
+## AWS Configuration Details
 # Capacity
 Server Type: AWS AMI Linux<br/>
 Max: 4<br/>
@@ -65,7 +71,3 @@ NumProcesses: 1<br/>
 NumThreads: 15<br/>
 WSGIPath: crawler/wsgi.py<br/>
 Static files: /static/="static/"<br/>
-
-##Architecture Diagram
-
-![](lp_architecture_diagram.png)
