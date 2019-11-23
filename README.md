@@ -42,6 +42,9 @@ If the scraping takes more time then user can leave the screen and come back lat
 ![](lp_architecture_diagram.png =300x300)
 
 
+<img src="./lp_architecture_diagram.png" width="200" height="200" />
+
+
 ## AWS Configuration Details
 # Capacity
 Server Type: AWS AMI Linux<br/>
