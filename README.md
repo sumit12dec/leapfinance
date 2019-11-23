@@ -58,3 +58,10 @@ Unhealthy threshold: 5<br/>
 Healthy threshold: 3<br/>
 Load balancer type: classic<br/>
 Timeout: 5<br/>
+
+# Software
+
+NumProcesses: 1<br/>
+NumThreads: 15<br/>
+WSGIPath: crawler/wsgi.py<br/>
+Static files: /static/="static/"<br/>
