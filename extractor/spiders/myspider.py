@@ -74,23 +74,25 @@ class GenericSpider(scrapy.Spider):
 		all_emails = self.extract_emails(response)
 		meta_keywords, meta_desc = self.extract_meta_tags(response)
 		img_urls = self.extract_images(response)
+		text = " ".join(response.xpath('//body//p/text()').extract())
 
-		res = {'title': title, 
-			   'text': " ".join(response.xpath('//body//p/text()').extract()),
+		res = {'title': title if title else 'null', 
+			   'text': text if text else 'null',
 			   # 'html': response.text,
-			   'all_links': all_links,
-			   'all_emails': all_emails,
-			   'meta_keywords': str(meta_keywords),
-			   'meta_desc': str(meta_desc),
-			   'images': img_urls,
+			   'all_links': all_links if all_links else [],
+			   'all_emails': all_emails if all_emails else [],
+			   'meta_keywords': str(meta_keywords) if str(meta_keywords) else 'null',
+			   'meta_desc': str(meta_desc) if str(meta_desc) else 'null',
+			   'images': img_urls if img_urls else [],
 			   'url_id': self.url_id
 			   }
 		for k in res:
 			print("here", k, type(res[k]))
-		# print(res, "before sending")
+
 		file_name = str(self.url_id) + '.txt'
 		public_link = upload_to_s3(response.text, file_name, 'crawled-htmls')
 		res['s3_link'] = "https://crawled-htmls.s3.amazonaws.com/" + file_name
+		print(res, "before sending")
 		self.store_in_dynamodb(res)
 
 		return res
