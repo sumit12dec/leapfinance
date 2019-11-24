@@ -38,7 +38,7 @@ If the scraping takes more time then user can leave the screen and come back lat
 
 # AWS Lambda Code
 
-Code deployed in AWS Lambda can be seen under extractor folder
+Code deployed in AWS Lambda can be seen under <b>extractor</b> folder. `lambda_function.py` is the entry module
 
 ## Architecture Diagram
 
